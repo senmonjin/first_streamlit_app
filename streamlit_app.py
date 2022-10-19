@@ -1,6 +1,8 @@
 import streamlit
 import pandas
 import requests
+import snowflake.connector
+from urllib.error import URLError
 
 streamlit.title('My Parents New Healthy Dinner')
 streamlit.header('Breakfast Favorites')
@@ -29,8 +31,7 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # lo pinta la tabla pandas en al app
 streamlit.dataframe(fruityvice_normalized)
 
-import snowflake.connector
-
+streamlit.stop()
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 ## my_cur.execute("USE WAREHOUSE COMPUTE_DWH")
