@@ -33,6 +33,7 @@ import snowflake.connector
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
+my_cur.execute("USE WAREHOUSE COMPUTE_DWH")
 my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
 my_data_row = my_cur.fetchone()
 streamlit.text("The fruit load list contains:")
